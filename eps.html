@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to EPS!</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-image: url('https://images.unsplash.com/photo-1490093158370-1a6be674437b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1014&q=80');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form action="#" onsubmit="handleSubmit(event)" class="border rounded shadow p-4 bg-light text-dark">
+          <p class="lead">Welcome Back!</p>
+          <h2 class="mt-4 mb-3 display-4">Salary Calculator</h2>
+          <div class="mb-3">
+            <label for="fixedSalary" class="form-label lead">Fixed Salary:</label>
+            <input type="number" class="form-control bg-light text-dark" id="fixedSalary"
+              placeholder="Enter Fixed Salary" />
+          </div>
+          <div class="mb-3">
+            <label for="daysWorked" class="form-label lead">Days Worked:</label>
+            <input type="number" class="form-control bg-light text-dark" id="daysWorked"
+              placeholder="Enter Days Worked" />
+          </div>
+          <div class="mb-3">
+            <label for="overtime" class="form-label lead">Overtime:</label>
+            <input type="number" class="form-control bg-light text-dark" id="overtime" placeholder="Enter Overtime" />
+          </div>
+          <button type="submit" class="btn btn-secondary btn-block">Calculate</button>
+        </form>
+      </div>
+    </div>
+    <div class="row justify-content-center my-5">
+      <div class="col-md-6">
+        <div class="border rounded shadow p-4 bg-light text-dark">
+          <p><strong class="lead">Total Salary:</strong> <span id="empsal"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sal = (daysworked, fixedsal, overtime) => {
+      let onedaysal = fixedsal / 20;
+      if (daysworked > 30) {
+        const exc = "Days worked exceeds 30 days";
+        return exc
+      }
+      else {
+        let totalsal = onedaysal * daysworked
+        if (overtime > 0) {
+          totalsal = totalsal + overtime * onedaysal
+        }
+        return totalsal + " ₹";
+      }
+    }
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const fixedSalary = parseFloat(document.getElementById('fixedSalary').value);
+      const daysWorked = parseInt(document.getElementById('daysWorked').value);
+      const overTime = parseInt(document.getElementById('overtime').value);
+      const empsal = sal(daysWorked, fixedSalary, overTime);
+      document.getElementById('empsal').innerHTML = empsal;
+
+    };
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
